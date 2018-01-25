@@ -37,7 +37,7 @@ class App extends Component {
           )} />
 
           {categories.map((category) => (
-            <Route exact path={`/category/${category}`} render={() => (
+            <Route exact path={`/${category}`} render={() => (
               <Category categoryName={category} categories={this.state.categories} />
             )} key={category} />
           ))}

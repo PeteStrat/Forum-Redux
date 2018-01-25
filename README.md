@@ -1,2 +1,5 @@
-### Download [Server API](https://github.com/udacity/reactnd-project-readable-starter)
-### Run Yarn && Yarn Start for API Server then do the same for this repository
+### Download [Back End](https://github.com/udacity/reactnd-project-readable-starter)
+#### - Use npm install && npm start
+
+### Clone This Repository
+#### Run yarn && Yarn Start
