@@ -104,6 +104,7 @@ class Category extends Component {
       ? posts = this.state.sortedPosts
       : posts = this.props.posts;
 
+    console.log(posts);
     categoryTitle === 'all'
       ? categoryTitle = 'All Posts'
       : categoryTitle = `Posts About ${categoryTitle}`;
@@ -118,6 +119,7 @@ class Category extends Component {
               <th> Post Title</th>
               <th> Category </th>
               <th> Author</th>
+              <th> Comment Count </th>
               <th> Vote Score <Glyphicon className='sort-button' glyph='sort' onClick={() => { this.sortPosts('voteScore'); }} /> </th>
               <th> Date Posted <Glyphicon className='sort-button' glyph='sort' onClick={() => { this.sortPosts('date'); }} /> </th>
             </tr>
@@ -127,6 +129,7 @@ class Category extends Component {
                   <td> <Link to={`/post/${post.id}`}> {post.title} </Link> </td>
                   <td> {post.category} </td>
                   <td> {post.author} </td>
+                  <td> {post.commentCount} </td>
                   <td> {post.voteScore} </td>
                   <td>
                     {(new Date(post.timestamp).getMonth() + 1).toString()}/
