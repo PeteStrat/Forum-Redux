@@ -58,7 +58,7 @@ class Post extends Component {
     } else if (this.state.deleted) {
       return (<Redirect to='/' />);
     } else {
-      let { author, body, timestamp, title, voteScore, id, commentCount } = this.props.post;
+      let { author, body, timestamp, title, voteScore, id } = this.props.post;
       let dateObject = new Date(timestamp);
       let day = dateObject.getDate().toString();
       let month = dateObject.getMonth().toString();
@@ -73,7 +73,7 @@ class Post extends Component {
             <h4> Written By: {author} on {day}/{month}/{year} </h4>
             <h4>
               <div> Post Rating: {voteScore} </div>
-              <div> Comment Count: {commentCount} </div>
+              <div> Comment Count: {commentsArray.length} </div>
               <Glyphicon
                 className='voteButton'
                 glyph='thumbs-up'
