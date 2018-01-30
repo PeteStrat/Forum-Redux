@@ -119,22 +119,21 @@ class Category extends Component {
   }
 
   render () {
-    let categoryTitle = this.props.categoryName;
     let { isNewPostModalOpen, isEditPostModalOpen, isDeletePostModalOpen } = this.state;
     let posts;
-    let { votePost } = this.props;
+    let { votePost, categoryName } = this.props;
     // If posts are Unsorted, get posts array from Props, otherwise from State
     (this.state.sorted === true)
       ? posts = this.state.sortedPosts
       : posts = this.props.posts;
 
-    categoryTitle === 'all'
-      ? categoryTitle = 'All Posts'
-      : categoryTitle = `Posts About ${categoryTitle}`;
+    categoryName === 'all'
+      ? categoryName = 'All Posts'
+      : categoryName = `Posts About ${categoryName}`;
 
     return (
       <div className='post-container'>
-        <h1 className='category-title'> {categoryTitle} </h1>
+        <h1 className='category-title'> {categoryName} </h1>
 
         <Table striped bordered condensed hover>
           <tbody>
@@ -150,7 +149,7 @@ class Category extends Component {
               posts.map((post) => (
                 <tr key={post.id}>
                   <td>
-                    <Link to={`/post/${post.id}`}> {post.title} </Link>
+                    <Link to={`/${post.category}/${post.id}`}> {post.title} </Link>
                     <Glyphicon
                       className='editButton'
                       glyph='edit'
