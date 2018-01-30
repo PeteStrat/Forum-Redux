@@ -38,6 +38,12 @@ function posts (state = initialPostState, action) {
     case VOTE_POST :
       return {
         ...state,
+        postsArray: state.postsArray.map((post) => {
+          if (post.id === action.payload.data.id) {
+            post.voteScore = action.payload.data.voteScore
+          }
+          return post;
+        }),
         currentPost: {
           ...state['currentPost'],
           voteScore: action.payload.data.voteScore

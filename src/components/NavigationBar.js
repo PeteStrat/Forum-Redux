@@ -20,7 +20,7 @@ class NavigationBar extends Component {
           <Nav>
             {
               categories.map((category) => (
-                <LinkContainer to={`/category/${category}`} key={category}>
+                <LinkContainer to={`/${category}`} key={category}>
                   <NavItem > {category} </NavItem>
                 </LinkContainer>
               ))
