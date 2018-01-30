@@ -46,8 +46,8 @@ class Post extends Component {
   }
 
   handleDelete = () => {
-    this.props.deletePost(this.props.id);
     this.setState(() => ({deleted: true}));
+    this.props.deletePost(this.props.id);
     this.toggleDeletePostModal();
   }
   render () {
@@ -55,7 +55,7 @@ class Post extends Component {
 
     if (!this.props.post) {
       return (<div> Rendering </div>);
-    } else if (this.state.deleted) {
+    } else if (!this.props.post.id) {
       return (<Redirect to='/' />);
     } else {
       let { author, body, timestamp, title, voteScore, id } = this.props.post;
