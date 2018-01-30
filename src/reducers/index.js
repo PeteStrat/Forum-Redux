@@ -40,7 +40,7 @@ function posts (state = initialPostState, action) {
         ...state,
         postsArray: state.postsArray.map((post) => {
           if (post.id === action.payload.data.id) {
-            post.voteScore = action.payload.data.voteScore
+            post.voteScore = action.payload.data.voteScore;
           }
           return post;
         }),
@@ -52,6 +52,12 @@ function posts (state = initialPostState, action) {
     case EDIT_POST :
       return {
         ...state,
+        postsArray: state.postsArray.map((post) => {
+          if (post.id === action.payload.data.id) {
+            return action.payload.data;
+          }
+          return post;
+        }),
         currentPost: action.payload.data
       };
     case DELETE_POST :

@@ -48,7 +48,7 @@ class EditPostForm extends Component {
               <FormControl
                 type='text'
                 defaultValue={title}
-                onChange={this.handleAuthorchange}
+                onChange={this.handleTitleChange}
                 title={this.state.title}
               />
             </Col>

@@ -12,7 +12,6 @@ import { Table,
 } from 'react-bootstrap';
 import EditPostForm from './EditPostForm';
 
-
 class Category extends Component {
   state = {
     sorted: false,
@@ -20,32 +19,29 @@ class Category extends Component {
     sortedPosts: [],
     isNewPostModalOpen: false,
     isEditPostModalOpen: false,
-    isDeletePostModalOpen: false
+    isDeletePostModalOpen: false,
+    postToModify: {}
   }
-  // openNewPostModal = () => {
-  //   this.setState(() => ({
-  //     isNewPostModalOpen: true
-  //   }));
-  // }
 
-  // closeNewPostModal = () => {
-  //   this.setState(() => ({
-  //     isNewPostModalOpen: false
-  //   }));
-  // }
   toggleNewPostModal = () => {
     (this.state.isNewPostModalOpen === true)
       ? this.setState(() => ({isNewPostModalOpen: false}))
       : this.setState(() => ({isNewPostModalOpen: true}));
   }
 
-  toggleEditPostModal = () => {
-    (this.state.isEditPostModalOpen === true)
-      ? this.setState(() => ({isEditPostModalOpen: false}))
-      : this.setState(() => ({isEditPostModalOpen: true}));
+  toggleEditPostModal = (post) => {
+    if (this.state.isEditPostModalOpen === true) {
+      this.setState(() => ({isEditPostModalOpen: false}));
+    } else {
+      console.log(post);
+      this.setState(() => ({
+        isEditPostModalOpen: true,
+        postToModify: post
+      }));
+    }
   }
 
-  toggleDeletePostModal = () => {
+  toggleDeletePostModal = (postId) => {
     (this.state.isDeletePostModalOpen === true)
       ? this.setState(() => ({isDeletePostModalOpen: false}))
       : this.setState(() => ({isDeletePostModalOpen: true}));
@@ -116,12 +112,17 @@ class Category extends Component {
     }
   }
 
+  handleDelete = () => {
+    this.props.deletePost(this.props.id);
+    this.setState(() => ({deleted: true}));
+    this.toggleDeletePostModal();
+  }
+
   render () {
     let categoryTitle = this.props.categoryName;
     let { isNewPostModalOpen, isEditPostModalOpen, isDeletePostModalOpen } = this.state;
     let posts;
     let { votePost } = this.props;
-
     // If posts are Unsorted, get posts array from Props, otherwise from State
     (this.state.sorted === true)
       ? posts = this.state.sortedPosts
@@ -153,7 +154,7 @@ class Category extends Component {
                     <Glyphicon
                       className='editButton'
                       glyph='edit'
-                      onClick={() => this.toggleEditPostModal()}
+                      onClick={() => this.toggleEditPostModal(post)}
                     />
                     <Glyphicon
                       className='deleteButton'
@@ -204,7 +205,6 @@ class Category extends Component {
           </Modal.Body>
         </Modal>
 
-
         <Modal
           bsSize='large'
           show={isEditPostModalOpen}
@@ -217,28 +217,28 @@ class Category extends Component {
           <Modal.Body>
             <EditPostForm
               close={this.toggleEditPostModal}
-              postId={id}
-              body={body}
-              title={title}
+              postId={this.state.postToModify.id}
+              body={this.state.postToModify.body}
+              title={this.state.postToModify.title}
             />
-            </Modal.Body>
-          </Modal>
+          </Modal.Body>
+        </Modal>
 
-          <Modal
-            show={isDeletePostModalOpen}
-            onHide={this.toggleDeletePostModal}
-          >
-            <Modal.Header>
-              <Modal.Title>Delete Post</Modal.Title>
-            </Modal.Header>
+        <Modal
+          show={isDeletePostModalOpen}
+          onHide={this.toggleDeletePostModal}
+        >
+          <Modal.Header>
+            <Modal.Title>Delete Post</Modal.Title>
+          </Modal.Header>
 
-            <Modal.Body>Are You Sure You Want To Delete This?</Modal.Body>
+          <Modal.Body>Are You Sure You Want To Delete This?</Modal.Body>
 
-            <Modal.Footer>
-              <Button onClick={() => { this.toggleDeletePostModal(); }}>Nevermind</Button>
-              <Button bsStyle='danger' onClick={() => { this.handleDelete(); }}> Delete Post </Button>
-            </Modal.Footer>
-          </Modal>
+          <Modal.Footer>
+            <Button onClick={() => { this.toggleDeletePostModal(); }}>Nevermind</Button>
+            <Button bsStyle='danger' onClick={() => { this.handleDelete(); }}> Delete Post </Button>
+          </Modal.Footer>
+        </Modal>
 
         <div className='add-post'>
           <FaPlusCircle className='add-post-link'size={50} onClick={this.toggleNewPostModal} />
@@ -254,7 +254,8 @@ Category.propTypes = {
   getAllPosts: propTypes.func.isRequired,
   posts: propTypes.arrayOf(propTypes.object),
   categories: propTypes.arrayOf(propTypes.string),
-  votePost: propTypes.func.isRequired
+  votePost: propTypes.func.isRequired,
+  deletePost: propTypes.func.isRequired
 };
 
 function mapStateToProps (state) {
