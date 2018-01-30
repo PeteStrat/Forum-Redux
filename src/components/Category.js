@@ -33,7 +33,6 @@ class Category extends Component {
     if (this.state.isEditPostModalOpen === true) {
       this.setState(() => ({isEditPostModalOpen: false}));
     } else {
-      console.log(post);
       this.setState(() => ({
         isEditPostModalOpen: true,
         postToModify: post
@@ -41,10 +40,12 @@ class Category extends Component {
     }
   }
 
-  toggleDeletePostModal = (postId) => {
+  toggleDeletePostModal = (post) => {
     (this.state.isDeletePostModalOpen === true)
       ? this.setState(() => ({isDeletePostModalOpen: false}))
-      : this.setState(() => ({isDeletePostModalOpen: true}));
+      : this.setState(() => ({isDeletePostModalOpen: true,
+        postToModify: post
+      }));
   }
 
   componentDidMount () {
@@ -113,8 +114,7 @@ class Category extends Component {
   }
 
   handleDelete = () => {
-    this.props.deletePost(this.props.id);
-    this.setState(() => ({deleted: true}));
+    this.props.deletePost(this.state.postToModify.id);
     this.toggleDeletePostModal();
   }
 
@@ -159,7 +159,7 @@ class Category extends Component {
                     <Glyphicon
                       className='deleteButton'
                       glyph='remove-circle'
-                      onClick={() => this.toggleDeletePostModal()}
+                      onClick={() => this.toggleDeletePostModal(post)}
                     />
                   </td>
                   <td> {post.category} </td>
