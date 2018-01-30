@@ -42,9 +42,11 @@ class App extends Component {
             )} key={category} />
           ))}
 
-          <Route path='/post/:id' render={(props) => (
-            <Post id={props.match.params.id} />
-          )} />
+          {categories.map((category) => (
+            <Route exact path={`/${category}/:id`} render={(props) => (
+              <Post id={props.match.params.id} />
+            )} key={category} />
+          ))}
 
           <Route component={ErrorPage} />
         </Switch>

@@ -46,8 +46,8 @@ class Post extends Component {
   }
 
   handleDelete = () => {
-    this.props.deletePost(this.props.id);
     this.setState(() => ({deleted: true}));
+    this.props.deletePost(this.props.id);
     this.toggleDeletePostModal();
   }
   render () {
@@ -55,7 +55,7 @@ class Post extends Component {
 
     if (!this.props.post) {
       return (<div> Rendering </div>);
-    } else if (this.state.deleted) {
+    } else if (!this.props.post.id) {
       return (<Redirect to='/' />);
     } else {
       let { author, body, timestamp, title, voteScore, id } = this.props.post;
@@ -72,7 +72,8 @@ class Post extends Component {
             <h1> {title} </h1>
             <h4> Written By: {author} on {day}/{month}/{year} </h4>
             <h4>
-              Post Rating: {voteScore}
+              <div> Post Rating: {voteScore} </div>
+              <div> Comment Count: {commentsArray.length} </div>
               <Glyphicon
                 className='voteButton'
                 glyph='thumbs-up'
