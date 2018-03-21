@@ -7,6 +7,8 @@ import NavigationBar from './NavigationBar';
 import Category from './Category';
 import ErrorPage from './ErrorPage';
 import Post from './Post';
+import { connect } from 'react-redux';
+import { getCategories } from '../actions';
 
 class App extends Component {
   state = {
@@ -14,19 +16,25 @@ class App extends Component {
   }
 
   componentDidMount () {
-    const url = 'http://localhost:3001/categories';
-    axios.get(url, {
-      headers: { 'Authorization': '123' }
-    })
-      .then((response) => {
-        let categoryNames = response.data.categories.map(category => category.name);
-        this.setState({categories: categoryNames});
-      });
+    this.props.getCategories();
+    // this.setState((prevState) => {
+    //   // this.props.getCategories
+    //   return this.props.getCategories;
+    // });
+    // const url = 'http://localhost:3001/categories';
+    // axios.get(url, {
+    //   headers: { 'Authorization': '123' }
+    // })
+    //   .then((response) => {
+    //     let categoryNames = response.data.categories.map(category => category.name);
+    //     this.setState({categories: categoryNames});
+    //   });
   }
 
   render () {
     let categories = this.state.categories;
-
+    // console.log(this.state);
+    // console.log(this.props);
     return (
       <div className='App'>
         <NavigationBar categories={this.state.categories} />
@@ -56,4 +64,11 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+let mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    test: 'testing state'
+  };
+};
+
+export default connect(mapStateToProps, {getCategories})(withRouter(App));
