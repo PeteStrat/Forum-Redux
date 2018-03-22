@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // import logo from '../logo.svg';
 import '../App.css';
-import axios from 'axios';
 import { withRouter, Route, Switch } from 'react-router-dom';
 import NavigationBar from './NavigationBar';
 import Category from './Category';
@@ -11,10 +10,6 @@ import { connect } from 'react-redux';
 import { getCategories } from '../actions';
 
 class App extends Component {
-  state = {
-    categories: []
-  }
-
   componentDidMount () {
     this.props.getCategories();
     // this.setState((prevState) => {
@@ -32,21 +27,25 @@ class App extends Component {
   }
 
   render () {
-    let categories = this.state.categories;
+    let categories = [];
     // console.log(this.state);
-    // console.log(this.props);
+    console.log(this.props);
+    if (this.props.categories) {
+      categories = this.props.categories;
+    }
+
     return (
       <div className='App'>
-        <NavigationBar categories={this.state.categories} />
+        <NavigationBar categories={categories} />
 
         <Switch>
           <Route exact path='/' render={() => (
-            <Category categoryName='all' categories={this.state.categories} />
+            <Category categoryName='all' categories={categories} />
           )} />
 
           {categories.map((category) => (
             <Route exact path={`/${category}`} render={() => (
-              <Category categoryName={category} categories={this.state.categories} />
+              <Category categoryName={category} categories={categories} />
             )} key={category} />
           ))}
 
@@ -65,10 +64,10 @@ class App extends Component {
 }
 
 let mapStateToProps = (state) => {
-  console.log(state);
   return {
-    test: 'testing state'
+    categories: state.categories.categoriesArray
   };
 };
 
-export default connect(mapStateToProps, {getCategories})(withRouter(App));
+// export default connect(mapStateToProps, {getCategories})(withRouter(App));
+export default withRouter(connect(mapStateToProps, {getCategories}), (App));
