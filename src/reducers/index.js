@@ -1,6 +1,7 @@
 // Reducers
 import { combineReducers } from 'redux';
 import {
+  GET_CATEGORIES,
   GET_ALL_POSTS,
   CREATE_NEW_POST,
   GET_POST,
@@ -13,6 +14,18 @@ import {
   DELETE_COMMENT,
   DELETE_POST
 } from '../actions';
+
+function categories (state = {}, action) {
+  switch (action.type) {
+    case GET_CATEGORIES:
+      return {
+        ...state,
+        categoriesArray: action.payload
+      };
+    default:
+      return state;
+  }
+}
 
 let initialPostState = {
   postsArray: []
@@ -123,5 +136,6 @@ function comments (state = initialCommentState, action) {
 
 export default combineReducers({
   posts,
-  comments
+  comments,
+  categories
 });
