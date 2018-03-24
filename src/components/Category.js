@@ -24,9 +24,7 @@ class Category extends Component {
   }
 
   toggleNewPostModal = () => {
-    (this.state.isNewPostModalOpen === true)
-      ? this.setState(() => ({isNewPostModalOpen: false}))
-      : this.setState(() => ({isNewPostModalOpen: true}));
+    this.setState(() => ({isNewPostModalOpen: !this.state.isNewPostModalOpen}));
   }
 
   toggleEditPostModal = (post) => {

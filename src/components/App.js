@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import logo from '../logo.svg';
 import '../App.css';
 import { withRouter, Route, Switch } from 'react-router-dom';
+import propTypes from 'prop-types';
 import NavigationBar from './NavigationBar';
 import Category from './Category';
 import ErrorPage from './ErrorPage';
@@ -12,23 +13,10 @@ import { getCategories } from '../actions';
 class App extends Component {
   componentDidMount () {
     this.props.getCategories();
-    // this.setState((prevState) => {
-    //   // this.props.getCategories
-    //   return this.props.getCategories;
-    // });
-    // const url = 'http://localhost:3001/categories';
-    // axios.get(url, {
-    //   headers: { 'Authorization': '123' }
-    // })
-    //   .then((response) => {
-    //     let categoryNames = response.data.categories.map(category => category.name);
-    //     this.setState({categories: categoryNames});
-    //   });
   }
 
   render () {
     let categories = [];
-    // console.log(this.state);
     console.log(this.props);
     if (this.props.categories) {
       categories = this.props.categories;
@@ -69,5 +57,9 @@ let mapStateToProps = (state) => {
   };
 };
 
-// export default connect(mapStateToProps, {getCategories})(withRouter(App));
-export default withRouter(connect(mapStateToProps, {getCategories}), (App));
+App.propTypes = {
+  categories: propTypes.array,
+  getCategories: propTypes.func.isRequired
+};
+
+export default withRouter(connect(mapStateToProps, {getCategories})(App));

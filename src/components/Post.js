@@ -28,21 +28,15 @@ class Post extends Component {
   }
 
   toggleNewCommentModal = () => {
-    (this.state.newCommentModalOpen === true)
-      ? this.setState(() => ({newCommentModalOpen: false}))
-      : this.setState(() => ({newCommentModalOpen: true}));
+    this.setState(() => ({newCommentModalOpen: !this.state.newCommentModalOpen}));
   }
 
   toggleEditPostModal = () => {
-    (this.state.isEditPostModalOpen === true)
-      ? this.setState(() => ({isEditPostModalOpen: false}))
-      : this.setState(() => ({isEditPostModalOpen: true}));
+    this.setState(() => ({isEditPostModalOpen: !this.state.isEditPostModalOpen}));
   }
 
   toggleDeletePostModal = () => {
-    (this.state.isDeletePostModalOpen === true)
-      ? this.setState(() => ({isDeletePostModalOpen: false}))
-      : this.setState(() => ({isDeletePostModalOpen: true}));
+    this.setState(() => ({isDeletePostModalOpen: !this.state.isDeletePostModalOpen}));
   }
 
   handleDelete = () => {
