@@ -69,5 +69,4 @@ let mapStateToProps = (state) => {
   };
 };
 
-// export default connect(mapStateToProps, {getCategories})(withRouter(App));
-export default withRouter(connect(mapStateToProps, {getCategories}), (App));
+export default withRouter(connect(mapStateToProps, {getCategories})(App));
