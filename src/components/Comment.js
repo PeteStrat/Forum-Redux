@@ -16,15 +16,11 @@ class Comment extends Component {
   }
 
   toggleEditCommentModal = () => {
-    (this.state.isEditCommentModalOpen === true)
-      ? this.setState(() => ({isEditCommentModalOpen: false}))
-      : this.setState(() => ({isEditCommentModalOpen: true}));
+    this.setState(() => ({isEditCommentModalOpen: !this.state.isEditCommentModalOpen}));
   }
 
   toggleDeleteCommentModal = () => {
-    (this.state.isDeleteCommentModalOpen === true)
-      ? this.setState(() => ({isDeleteCommentModalOpen: false}))
-      : this.setState(() => ({isDeleteCommentModalOpen: true}));
+    this.setState(() => ({isDeleteCommentModalOpen: !this.state.isDeleteCommentModalOpen}));
   }
 
   render () {
