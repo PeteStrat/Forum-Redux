@@ -1,19 +1,26 @@
 // Reducers
 import { combineReducers } from 'redux';
 import {
-  GET_CATEGORIES,
+  GET_CATEGORIES
+} from '../actions';
+
+import {
   GET_ALL_POSTS,
   CREATE_NEW_POST,
   GET_POST,
+  VOTE_POST,
+  DELETE_POST,
+  EDIT_POST
+} from '../actions/postActions';
+
+import {
   GET_POST_COMMENTS,
   CREATE_COMMENT,
   VOTE_COMMENT,
-  VOTE_POST,
-  EDIT_POST,
   EDIT_COMMENT,
-  DELETE_COMMENT,
-  DELETE_POST
-} from '../actions';
+  DELETE_COMMENT
+} from '../actions/commentActions';
+
 
 function categories (state = {}, action) {
   switch (action.type) {

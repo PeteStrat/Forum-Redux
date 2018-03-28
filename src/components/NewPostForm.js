@@ -10,7 +10,7 @@ import {
   ControlLabel
 } from 'react-bootstrap';
 import generateId from '../utils/GenerateId';
-import { createNewPost } from '../actions';
+import { createNewPost } from '../actions/postActions';
 
 class NewPostForm extends Component {
   state = {

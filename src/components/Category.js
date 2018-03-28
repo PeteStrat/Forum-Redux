@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getAllPosts, votePost, deletePost } from '../actions';
+import { getAllPosts, votePost, deletePost } from '../actions/postActions';
 import { Link } from 'react-router-dom';
 import FaPlusCircle from 'react-icons/lib/fa/plus-circle';
 import NewPostForm from './NewPostForm';

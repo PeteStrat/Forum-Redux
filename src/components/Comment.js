@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { voteComment, editComment, deleteComment } from '../actions';
+import { voteComment, editComment, deleteComment } from '../actions/commentActions';
 import {
   Glyphicon,
   Modal,
