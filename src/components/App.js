@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import logo from '../logo.svg';
 import '../App.css';
 import { withRouter, Route, Switch } from 'react-router-dom';
 import propTypes from 'prop-types';
@@ -16,28 +15,30 @@ class App extends Component {
   }
 
   render () {
-    let categories = [];
-    console.log(this.props);
-    if (this.props.categories) {
-      categories = this.props.categories;
-    }
+    const categories = (() => {
+      if (this.props.categories) {
+        return this.props.categories;
+      } else {
+        return [];
+      }
+    });
 
     return (
       <div className='App'>
-        <NavigationBar categories={categories} />
+        <NavigationBar categories={categories()} />
 
         <Switch>
           <Route exact path='/' render={() => (
-            <Category categoryName='all' categories={categories} />
+            <Category categoryName='all' categories={categories()} />
           )} />
 
-          {categories.map((category) => (
+          {categories().map((category) => (
             <Route exact path={`/${category}`} render={() => (
-              <Category categoryName={category} categories={categories} />
+              <Category categoryName={category} categories={categories()} />
             )} key={category} />
           ))}
 
-          {categories.map((category) => (
+          {categories().map((category) => (
             <Route exact path={`/${category}/:id`} render={(props) => (
               <Post id={props.match.params.id} />
             )} key={category} />

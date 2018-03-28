@@ -27,13 +27,13 @@ class Comment extends Component {
     if (!this.props.commentData) {
       return (<div> Rendering </div>);
     } else {
-      let { author, body, timestamp, voteScore, id } = this.props.commentData;
-      let dateObject = new Date(timestamp);
-      let day = dateObject.getDate().toString();
-      let month = (dateObject.getMonth() + 1).toString();
-      let year = dateObject.getFullYear().toString();
-      let { voteComment } = this.props;
-      let { isEditCommentModalOpen, isDeleteCommentModalOpen } = this.state;
+      const { author, body, timestamp, voteScore, id } = this.props.commentData;
+      const dateObject = new Date(timestamp);
+      const day = dateObject.getDate().toString();
+      const month = (dateObject.getMonth() + 1).toString();
+      const year = dateObject.getFullYear().toString();
+      const { voteComment } = this.props;
+      const { isEditCommentModalOpen, isDeleteCommentModalOpen } = this.state;
 
       return (
         <div>
