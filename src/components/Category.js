@@ -11,6 +11,7 @@ import { Table,
   Button
 } from 'react-bootstrap';
 import EditPostForm from './EditPostForm';
+import DateFormat from '../utils/DateFormat';
 
 class Category extends Component {
   state = {
@@ -176,9 +177,9 @@ class Category extends Component {
                     />
                   </td>
                   <td>
-                    {(new Date(post.timestamp).getMonth() + 1).toString()}/
-                    {new Date(post.timestamp).getDate().toString()}/
-                    {new Date(post.timestamp).getUTCFullYear().toString()}
+                    {DateFormat.month(post.timestamp)}/
+                    {DateFormat.day(post.timestamp)}/
+                    {DateFormat.year(post.timestamp)}
                   </td>
                 </tr>
               ))

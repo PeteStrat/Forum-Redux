@@ -8,6 +8,7 @@ import {
   Button
 } from 'react-bootstrap';
 import EditCommentForm from './EditCommentForm';
+import DateFormat from '../utils/DateFormat';
 
 class Comment extends Component {
   state = {
@@ -29,9 +30,9 @@ class Comment extends Component {
     } else {
       const { author, body, timestamp, voteScore, id } = this.props.commentData;
       const dateObject = new Date(timestamp);
-      const day = dateObject.getDate().toString();
-      const month = (dateObject.getMonth() + 1).toString();
-      const year = dateObject.getFullYear().toString();
+      const day = DateFormat.day(dateObject);
+      const month = DateFormat.month(dateObject);
+      const year = DateFormat.year(dateObject);
       const { voteComment } = this.props;
       const { isEditCommentModalOpen, isDeleteCommentModalOpen } = this.state;
 
