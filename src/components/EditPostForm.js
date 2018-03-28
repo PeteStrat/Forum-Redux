@@ -8,7 +8,7 @@ import {
   Col,
   Button
 } from 'react-bootstrap';
-import { editPost } from '../actions';
+import { editPost } from '../actions/postActions';
 
 class EditPostForm extends Component {
   state = {

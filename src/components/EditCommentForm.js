@@ -8,7 +8,7 @@ import {
   Col,
   Button
 } from 'react-bootstrap';
-import { editComment } from '../actions/index';
+import { editComment } from '../actions/commentActions';
 
 class EditCommentForm extends Component {
   state = {

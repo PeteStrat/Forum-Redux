@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getAllPosts, votePost, deletePost } from '../actions';
+import { getAllPosts, votePost, deletePost } from '../actions/postActions';
 import { Link } from 'react-router-dom';
 import FaPlusCircle from 'react-icons/lib/fa/plus-circle';
 import NewPostForm from './NewPostForm';
@@ -11,6 +11,7 @@ import { Table,
   Button
 } from 'react-bootstrap';
 import EditPostForm from './EditPostForm';
+import DateFormat from '../utils/DateFormat';
 
 class Category extends Component {
   state = {
@@ -176,9 +177,9 @@ class Category extends Component {
                     />
                   </td>
                   <td>
-                    {(new Date(post.timestamp).getMonth() + 1).toString()}/
-                    {new Date(post.timestamp).getDate().toString()}/
-                    {new Date(post.timestamp).getUTCFullYear().toString()}
+                    {DateFormat.month(post.timestamp)}/
+                    {DateFormat.day(post.timestamp)}/
+                    {DateFormat.year(post.timestamp)}
                   </td>
                 </tr>
               ))

@@ -9,7 +9,7 @@ import {
   Button
 } from 'react-bootstrap';
 import generateId from '../utils/GenerateId';
-import { createComment } from '../actions';
+import { createComment } from '../actions/commentActions';
 
 class NewCommentForm extends Component {
   state = {

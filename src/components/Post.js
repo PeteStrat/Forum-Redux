@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getPost, getPostComments, votePost, deletePost } from '../actions';
+import { getPost, votePost, deletePost } from '../actions/postActions';
+import { getPostComments } from '../actions/commentActions';
 import Comment from './Comment';
 import NewCommentForm from './NewCommentForm';
 import FaPlusCircle from 'react-icons/lib/fa/plus-circle';

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { voteComment, editComment, deleteComment } from '../actions';
+import { voteComment, editComment, deleteComment } from '../actions/commentActions';
 import {
   Glyphicon,
   Modal,
   Button
 } from 'react-bootstrap';
 import EditCommentForm from './EditCommentForm';
+import DateFormat from '../utils/DateFormat';
 
 class Comment extends Component {
   state = {
@@ -27,13 +28,13 @@ class Comment extends Component {
     if (!this.props.commentData) {
       return (<div> Rendering </div>);
     } else {
-      let { author, body, timestamp, voteScore, id } = this.props.commentData;
-      let dateObject = new Date(timestamp);
-      let day = dateObject.getDate().toString();
-      let month = (dateObject.getMonth() + 1).toString();
-      let year = dateObject.getFullYear().toString();
-      let { voteComment } = this.props;
-      let { isEditCommentModalOpen, isDeleteCommentModalOpen } = this.state;
+      const { author, body, timestamp, voteScore, id } = this.props.commentData;
+      const dateObject = new Date(timestamp);
+      const day = DateFormat.day(dateObject);
+      const month = DateFormat.month(dateObject);
+      const year = DateFormat.year(dateObject);
+      const { voteComment } = this.props;
+      const { isEditCommentModalOpen, isDeleteCommentModalOpen } = this.state;
 
       return (
         <div>
